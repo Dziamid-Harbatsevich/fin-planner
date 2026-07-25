@@ -31,7 +31,7 @@ test('team invitations can be created', function () {
     ]);
 });
 
-test('invitation email for existing users uses login route', function () {
+test('invitation email includes public invitation link', function () {
     $owner = User::factory()->create();
     $invitedUser = User::factory()->create(['email' => 'invited@example.com']);
     $team = Team::factory()->create();
@@ -46,11 +46,13 @@ test('invitation email for existing users uses login route', function () {
 
     $mail = (new TeamInvitationNotification($invitation))->toMail($invitedUser);
 
+    // The primary action button is "Log in to Accept" which goes to login route
     expect($mail->actionUrl)->toBe(route('login', ['invitation' => $invitation->code]));
-    $this->assertStringContainsString('dashboard', implode(' ', $mail->introLines));
+    // Check for invitation management text
+    $this->assertStringContainsString('view and manage', strtolower(implode(' ', $mail->introLines)));
 });
 
-test('invitation email for unknown users uses login route', function () {
+test('invitation email includes login option', function () {
     $owner = User::factory()->create();
     $team = Team::factory()->create();
 
@@ -64,8 +66,12 @@ test('invitation email for unknown users uses login route', function () {
 
     $mail = (new TeamInvitationNotification($invitation))->toMail((object) []);
 
+    // The primary action button is "Log in to Accept" which goes to login route
     expect($mail->actionUrl)->toBe(route('login', ['invitation' => $invitation->code]));
-    $this->assertStringContainsString('log in', strtolower(implode(' ', $mail->introLines)));
+    // Check for invitation management text
+    $this->assertStringContainsString('view and manage', strtolower(implode(' ', $mail->introLines)));
+    // Check for login option text
+    $this->assertStringContainsString('if you already have an account', strtolower(implode(' ', $mail->outroLines)));
 });
 
 test('team invitations can be created by admins', function () {
