@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Teams;
 
 use App\Enums\TeamRole;
@@ -103,6 +105,4 @@ class TeamInvitationController extends Controller
 
         return to_route('dashboard');
     }
-
-
 }

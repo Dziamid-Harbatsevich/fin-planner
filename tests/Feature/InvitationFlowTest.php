@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Team;
@@ -16,7 +18,7 @@ class InvitationFlowTest extends TestCase
     {
         $owner = User::factory()->create();
         $team = Team::factory()->create();
-        
+
         $owner->teams()->attach($team, ['role' => 'owner']);
 
         $this->actingAs($owner);
@@ -37,7 +39,7 @@ class InvitationFlowTest extends TestCase
     {
         $owner = User::factory()->create();
         $team = Team::factory()->create();
-        
+
         $owner->teams()->attach($team, ['role' => 'owner']);
 
         $invitation = TeamInvitation::create([
@@ -62,7 +64,7 @@ class InvitationFlowTest extends TestCase
         $owner = User::factory()->create();
         $team = Team::factory()->create();
         $user = User::factory()->create(['email' => 'member@example.com']);
-        
+
         $owner->teams()->attach($team, ['role' => 'owner']);
 
         $invitation = TeamInvitation::create([
@@ -86,7 +88,7 @@ class InvitationFlowTest extends TestCase
         $this->assertDatabaseHas('team_invitations', [
             'id' => $invitation->id,
         ]);
-        
+
         $invitation->refresh();
         $this->assertNotNull($invitation->accepted_at);
     }
@@ -96,7 +98,7 @@ class InvitationFlowTest extends TestCase
         $owner = User::factory()->create();
         $team = Team::factory()->create();
         $user = User::factory()->create(['email' => 'member@example.com']);
-        
+
         $owner->teams()->attach($team, ['role' => 'owner']);
         // Make user a member of the team to access dashboard
         $user->teams()->attach($team, ['role' => 'member']);
