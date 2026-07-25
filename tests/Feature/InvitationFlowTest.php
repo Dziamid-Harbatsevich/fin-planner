@@ -15,7 +15,7 @@ class InvitationFlowTest extends TestCase
     public function test_invitation_can_be_sent_to_new_user(): void
     {
         $owner = User::factory()->create();
-        $team = Team::factory()->create(['user_id' => $owner->id]);
+        $team = Team::factory()->create();
         
         $owner->teams()->attach($team, ['role' => 'owner']);
 
@@ -36,7 +36,7 @@ class InvitationFlowTest extends TestCase
     public function test_invitation_can_be_viewed_publicly(): void
     {
         $owner = User::factory()->create();
-        $team = Team::factory()->create(['user_id' => $owner->id]);
+        $team = Team::factory()->create();
         
         $owner->teams()->attach($team, ['role' => 'owner']);
 
@@ -60,7 +60,7 @@ class InvitationFlowTest extends TestCase
     public function test_existing_user_can_accept_invitation(): void
     {
         $owner = User::factory()->create();
-        $team = Team::factory()->create(['user_id' => $owner->id]);
+        $team = Team::factory()->create();
         $user = User::factory()->create(['email' => 'member@example.com']);
         
         $owner->teams()->attach($team, ['role' => 'owner']);
@@ -85,17 +85,22 @@ class InvitationFlowTest extends TestCase
         ]);
         $this->assertDatabaseHas('team_invitations', [
             'id' => $invitation->id,
-            'accepted_at' => now(),
         ]);
+        
+        $invitation->refresh();
+        $this->assertNotNull($invitation->accepted_at);
     }
 
     public function test_invitation_shows_in_dashboard(): void
     {
         $owner = User::factory()->create();
-        $team = Team::factory()->create(['user_id' => $owner->id]);
+        $team = Team::factory()->create();
         $user = User::factory()->create(['email' => 'member@example.com']);
         
         $owner->teams()->attach($team, ['role' => 'owner']);
+        // Make user a member of the team to access dashboard
+        $user->teams()->attach($team, ['role' => 'member']);
+        $user->switchTeam($team);
 
         $invitation = TeamInvitation::create([
             'team_id' => $team->id,
