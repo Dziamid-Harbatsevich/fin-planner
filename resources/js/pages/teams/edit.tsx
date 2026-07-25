@@ -7,6 +7,7 @@ import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import InviteMemberModal from '@/components/invite-member-modal';
 import RemoveMemberModal from '@/components/remove-member-modal';
+import { TeamSwitcher } from '@/components/team-switcher';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -93,6 +94,10 @@ export default function TeamEdit({
             <Head title={pageTitle} />
 
             <h1 className="sr-only">{pageTitle}</h1>
+
+            <div className="mb-4">
+                <TeamSwitcher inHeader />
+            </div>
 
             <div className="flex flex-col space-y-10">
                 <div className="space-y-6">
