@@ -12,7 +12,10 @@ type Props = {
     teamUsersCount?: number;
 };
 
-export default function Dashboard({ pendingInvitations = [], teamUsersCount = 0 }: Props) {
+export default function Dashboard({
+    pendingInvitations = [],
+    teamUsersCount = 0,
+}: Props) {
     const [showInvitations, setShowInvitations] = useState(
         pendingInvitations.length > 0,
     );
@@ -29,7 +32,9 @@ export default function Dashboard({ pendingInvitations = [], teamUsersCount = 0 
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                     <TeamUsersCountWidget count={teamUsersCount} />
                     {pendingInvitations.length > 0 ? (
-                        <PendingInvitationsWidget invitations={pendingInvitations} />
+                        <PendingInvitationsWidget
+                            invitations={pendingInvitations}
+                        />
                     ) : (
                         <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                             <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />

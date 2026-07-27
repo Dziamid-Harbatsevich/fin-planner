@@ -2,7 +2,14 @@ import { Head, router } from '@inertiajs/react';
 import { Check, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { accept, decline } from '@/routes/invitations';
 
@@ -63,7 +70,8 @@ export default function InvitationShow({ invitation }: Props) {
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm text-muted-foreground">
-                                You are now a member of the "{invitation.teamName}" team.
+                                You are now a member of the "
+                                {invitation.teamName}" team.
                             </p>
                         </CardContent>
                     </Card>
@@ -89,7 +97,8 @@ export default function InvitationShow({ invitation }: Props) {
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm text-muted-foreground">
-                                Please contact {invitation.inviterName} for a new invitation.
+                                Please contact {invitation.inviterName} for a
+                                new invitation.
                             </p>
                         </CardContent>
                     </Card>
@@ -111,9 +120,12 @@ export default function InvitationShow({ invitation }: Props) {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
-                            <h3 className="text-lg font-semibold">{invitation.teamName}</h3>
+                            <h3 className="text-lg font-semibold">
+                                {invitation.teamName}
+                            </h3>
                             <p className="text-sm text-muted-foreground">
-                                {invitation.inviterName} has invited you to join this team.
+                                {invitation.inviterName} has invited you to join
+                                this team.
                             </p>
                         </div>
 
@@ -121,18 +133,30 @@ export default function InvitationShow({ invitation }: Props) {
 
                         <div className="space-y-2">
                             <div className="flex justify-between">
-                                <span className="text-sm font-medium">Email</span>
-                                <span className="text-sm">{invitation.email}</span>
+                                <span className="text-sm font-medium">
+                                    Email
+                                </span>
+                                <span className="text-sm">
+                                    {invitation.email}
+                                </span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-sm font-medium">Role</span>
-                                <span className="text-sm">{invitation.roleLabel}</span>
+                                <span className="text-sm font-medium">
+                                    Role
+                                </span>
+                                <span className="text-sm">
+                                    {invitation.roleLabel}
+                                </span>
                             </div>
                             {invitation.expiresAt && (
                                 <div className="flex justify-between">
-                                    <span className="text-sm font-medium">Expires</span>
+                                    <span className="text-sm font-medium">
+                                        Expires
+                                    </span>
                                     <span className="text-sm">
-                                        {new Date(invitation.expiresAt).toLocaleDateString()}
+                                        {new Date(
+                                            invitation.expiresAt,
+                                        ).toLocaleDateString()}
                                     </span>
                                 </div>
                             )}
@@ -142,8 +166,9 @@ export default function InvitationShow({ invitation }: Props) {
 
                         <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
                             <p className="text-sm text-blue-800 dark:text-blue-200">
-                                To accept this invitation, you need to log in or create an account.
-                                If you're not logged in, you'll be redirected to the login page.
+                                To accept this invitation, you need to log in or
+                                create an account. If you're not logged in,
+                                you'll be redirected to the login page.
                             </p>
                         </div>
                     </CardContent>
@@ -155,18 +180,23 @@ export default function InvitationShow({ invitation }: Props) {
                                 onClick={handleDecline}
                                 disabled={processing}
                             >
-                                {processing && action === 'decline' ? 'Declining...' : 'Decline'}
+                                {processing && action === 'decline'
+                                    ? 'Declining...'
+                                    : 'Decline'}
                             </Button>
                             <Button
                                 className="flex-1"
                                 onClick={handleAccept}
                                 disabled={processing}
                             >
-                                {processing && action === 'accept' ? 'Accepting...' : 'Accept Invitation'}
+                                {processing && action === 'accept'
+                                    ? 'Accepting...'
+                                    : 'Accept Invitation'}
                             </Button>
                         </div>
                         <p className="text-center text-xs text-muted-foreground">
-                            By accepting, you'll be added to the team with the "{invitation.roleLabel}" role.
+                            By accepting, you'll be added to the team with the "
+                            {invitation.roleLabel}" role.
                         </p>
                     </CardFooter>
                 </Card>

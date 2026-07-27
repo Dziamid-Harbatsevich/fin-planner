@@ -1,10 +1,10 @@
 import { router } from '@inertiajs/react';
-import { Mail, Users } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { useState } from 'react';
 import TeamInvitationController from '@/actions/App/Http/Controllers/Teams/TeamInvitationController';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import type { DashboardInvitation } from '@/types';
 
 type Props = {
@@ -52,7 +52,9 @@ export default function PendingInvitationsWidget({ invitations }: Props) {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    disabled={processingCode === invitation.code}
+                                    disabled={
+                                        processingCode === invitation.code
+                                    }
                                     onClick={() => acceptInvitation(invitation)}
                                 >
                                     Accept
@@ -69,7 +71,8 @@ export default function PendingInvitationsWidget({ invitations }: Props) {
                     )}
                 </div>
                 <p className="mt-4 text-xs text-muted-foreground">
-                    You have {invitations.length} pending team invitation{invitations.length !== 1 ? 's' : ''}
+                    You have {invitations.length} pending team invitation
+                    {invitations.length !== 1 ? 's' : ''}
                 </p>
             </CardContent>
         </Card>
