@@ -10,7 +10,7 @@ use Illuminate\Routing\Route as RouteElement;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class TeamName implements ValidationRule
+class TeamNameRule implements ValidationRule
 {
     /**
      * Run the validation rule.

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Teams;
 
-use App\Rules\TeamName;
+use App\Rules\TeamNameRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,7 +18,7 @@ class SaveTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', new TeamName],
+            'name' => ['required', 'string', 'max:255', new TeamNameRule],
         ];
     }
 }

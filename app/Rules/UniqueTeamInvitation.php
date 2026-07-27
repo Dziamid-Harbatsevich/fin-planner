@@ -10,7 +10,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class UniqueTeamInvitation implements ValidationRule
+class UniqueTeamInvitationRule implements ValidationRule
 {
     public function __construct(protected Team $team)
     {
